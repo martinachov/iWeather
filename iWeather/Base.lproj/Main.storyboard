@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="yxW-Ud-tdx">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Custom View Controller-->
+        <scene sceneID="2fA-m8-ozQ">
+            <objects>
+                <viewController id="yxW-Ud-tdx" customClass="CustomViewController" customModule="iWeather" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rln-NE-Ly5"/>
+                        <viewControllerLayoutGuide type="bottom" id="7fP-tG-0Wc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wvz-ws-oTY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NLW-qF-DKc">
+                                <rect key="frame" x="0.0" y="39" width="375" height="628"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="yxW-Ud-tdx" id="AJv-Jl-RZj"/>
+                                    <outlet property="delegate" destination="yxW-Ud-tdx" id="P8H-SM-foe"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="NLW-qF-DKc" secondAttribute="trailing" id="JHz-9k-kgX"/>
+                            <constraint firstItem="7fP-tG-0Wc" firstAttribute="top" secondItem="NLW-qF-DKc" secondAttribute="bottom" id="Kjz-dX-97w"/>
+                            <constraint firstItem="NLW-qF-DKc" firstAttribute="leading" secondItem="wvz-ws-oTY" secondAttribute="leading" id="kEN-GJ-e9h"/>
+                            <constraint firstItem="NLW-qF-DKc" firstAttribute="top" secondItem="rln-NE-Ly5" secondAttribute="bottom" constant="19" id="m0z-ru-rFV"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cityTable" destination="NLW-qF-DKc" id="Rh8-Zg-bd5"/>
+                        <segue destination="tTF-8b-9oL" kind="show" identifier="addCitySegue" id="Ckb-Ll-S6Q"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ggU-mF-17R" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="77.599999999999994" y="10.344827586206897"/>
+        </scene>
+        <!--Add City View Controller-->
+        <scene sceneID="Qhv-fR-lMB">
+            <objects>
+                <viewController id="tTF-8b-9oL" customClass="AddCityViewController" customModule="iWeather" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MVN-XN-3uI"/>
+                        <viewControllerLayoutGuide type="bottom" id="UVe-c1-gH8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OAH-Ij-Yz3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seleccione una ciudad" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cKD-he-27m">
+                                <rect key="frame" x="14" y="31" width="108.5" height="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dnH-DQ-xf3">
+                                <rect key="frame" x="0.0" y="51" width="375" height="616"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="tTF-8b-9oL" id="9xg-OV-PE7"/>
+                                    <outlet property="delegate" destination="tTF-8b-9oL" id="5SR-2F-sVP"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="cKD-he-27m" firstAttribute="leading" secondItem="OAH-Ij-Yz3" secondAttribute="leading" constant="14" id="BZg-bZ-FgY"/>
+                            <constraint firstAttribute="trailing" secondItem="dnH-DQ-xf3" secondAttribute="trailing" id="awJ-B9-R8q"/>
+                            <constraint firstItem="dnH-DQ-xf3" firstAttribute="leading" secondItem="OAH-Ij-Yz3" secondAttribute="leading" id="kv0-v1-I4G"/>
+                            <constraint firstItem="cKD-he-27m" firstAttribute="top" secondItem="MVN-XN-3uI" secondAttribute="bottom" constant="11" id="moI-1R-ki4"/>
+                            <constraint firstItem="UVe-c1-gH8" firstAttribute="top" secondItem="dnH-DQ-xf3" secondAttribute="bottom" id="ph9-zK-FwZ"/>
+                            <constraint firstItem="dnH-DQ-xf3" firstAttribute="top" secondItem="cKD-he-27m" secondAttribute="bottom" constant="8" id="raM-rx-OPe"/>
+                            <constraint firstItem="cKD-he-27m" firstAttribute="leading" secondItem="OAH-Ij-Yz3" secondAttribute="leading" constant="14" id="thu-zi-Bst"/>
+                            <constraint firstItem="cKD-he-27m" firstAttribute="top" secondItem="MVN-XN-3uI" secondAttribute="bottom" constant="11" id="yNL-NF-Nyn"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="dnH-DQ-xf3" id="aWT-gB-rQW"/>
+                        <segue destination="yxW-Ud-tdx" kind="show" identifier="goBackSegue" id="mvZ-rr-dGs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SF9-NC-xzd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1086" y="10"/>
+        </scene>
+    </scenes>
+</document>

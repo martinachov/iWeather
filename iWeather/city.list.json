@@ -1,0 +1,119 @@
+[
+  {
+    "id": 3433658,
+    "name": "Gualeguaychu",
+    "country": "AR",
+    "coord": {
+      "lon": -58.51722,
+      "lat": -33.00938
+    }
+  },
+  {
+    "id": 3433803,
+    "name": "General Jose de San Martin",
+    "country": "AR",
+    "coord": {
+      "lon": -59.341579,
+      "lat": -26.53743
+    }
+  },
+  {
+    "id": 3433956,
+    "name": "Federal",
+    "country": "AR",
+    "coord": {
+      "lon": -58.78326,
+      "lat": -30.954651
+    }
+  },
+  {
+    "id": 3832791,
+    "name": "Villa Carlos Paz",
+    "country": "AR",
+    "coord": {
+      "lon": -64.49778,
+      "lat": -31.424141
+    }
+  },
+  {
+    "id": 3837702,
+    "name": "San Fernando del Valle de Catamarca",
+    "country": "AR",
+    "coord": {
+      "lon": -65.78524,
+      "lat": -28.46957
+    }
+  },
+  {
+    "id": 3838583,
+    "name": "Rosario",
+    "country": "AR",
+    "coord": {
+      "lon": -60.63932,
+      "lat": -32.946819
+    }
+  },
+  {
+    "id": 3838874,
+    "name": "Rio Cuarto",
+    "country": "AR",
+    "coord": {
+      "lon": -64.349922,
+      "lat": -33.130669
+    }
+  },
+  {
+    "id": 6693229,
+    "name": "San Nicolas",
+    "country": "AR",
+    "coord": {
+      "lon": -58.376068,
+      "lat": -34.605019
+    }
+  },
+  {
+    "id": 3841476,
+    "name": "Perito Moreno",
+    "country": "AR",
+    "coord": {
+      "lon": -71.409401,
+      "lat": -41.11618
+    }
+  },
+  {
+    "id": 3428067,
+    "name": "San Vicente",
+    "country": "AR",
+    "coord": {
+      "lon": -58.42276,
+      "lat": -35.025002
+    }
+  },
+  {
+    "id": 3432043,
+    "name": "La Plata",
+    "country": "AR",
+    "coord": {
+      "lon": -57.954529,
+      "lat": -34.921452
+    }
+  },
+  {
+    "id": 3833875,
+    "name": "Trenque Lauquen",
+    "country": "AR",
+    "coord": {
+      "lon": -62.734322,
+      "lat": -35.970348
+    }
+  },
+  {
+    "id": 3433955,
+    "name": "Ciudad Autónoma de Buenos Aires",
+    "country": "AR",
+    "coord": {
+      "lon": -58.450001,
+      "lat": -34.599998
+    }
+  }
+]
