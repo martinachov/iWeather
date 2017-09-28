@@ -27,11 +27,12 @@ class CustomViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let nibBottom = UINib(nibName: "BottomTableViewCell", bundle: nil)
         cityTable.register( nibBottom, forCellReuseIdentifier: "bottomCell")
-
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    
+    //Se refresca la tabla por si hay elementos nuevos
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.cityTable.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -70,12 +71,28 @@ class CustomViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 cityCell = cityTable.dequeueReusableCell(withIdentifier: "cityCell", for: indexPath) as! CityTableViewCell
                 cityCell.cityLabel.text = ciudades[indexPath.row].name
                 cityCell.timeLabel.text = self.getCurrentTime()
-                cityCell.tempLabel.text = "13º"
+                cityCell.tempLabel.text = self.formatTempValue(ciudades[indexPath.row].weather.temp)
                 return cityCell
             }
         }
     }
     
+    //Funcionalidad para habilitar el Swipe Delete
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.delete {
+            ciudades.remove(at: indexPath.row)
+            cityTable.reloadData()
+        }
+    }
+    
+    
+    //Implementacion del metodo definido en el protocolo DataEnteredDelegate
+    //Se selecciono una ciudad en otro view controller
+    func cityIsSelected(_ cityInfo: City) {
+        let city = City(name: cityInfo.name, id: cityInfo.id, country: cityInfo.country, weather: cityInfo.weather)
+        ciudades.append(city)
+    }
+ 
     //Devuelve hora actual
     private func getCurrentTime() -> String {
         let date = Date()
@@ -85,11 +102,10 @@ class CustomViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return hour + ":" + minutes
     }
     
-    //Implementacion del metodo definido en el protocolo DataEnteredDelegate
-    //Se selecciono una ciudad en otro view controller
-    func cityIsSelected(_ city: City) {
-        ciudades.append(city)
+    //Redondea el valor de la temperatura y devuelve un entero
+    private func formatTempValue(_ temp: String) -> String {
+        let num = (temp as NSString).floatValue
+        return String(format: "%.0f", num)
     }
-    
 }
 

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 // Protocolo usado para mandar la ciudad seleccionada al controller correspondiente
 protocol DataEnteredDelegate: class {
@@ -17,7 +18,7 @@ class AddCityViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     //Referencia al Controller delegado que va a manejar el evento de ciudad seleccionada
     // making this a weak variable so that it won't create a strong reference cycle
-    weak var delegate: UIViewController? = nil
+    weak var delegate: CustomViewController?
     
     @IBOutlet var tableView: UITableView!
     
@@ -45,13 +46,16 @@ class AddCityViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.didReceiveMemoryWarning()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "goBackSegue"){
-            let viewController:CustomViewController = segue.destination as! CustomViewController
-            let indexPath = self.tableView.indexPathForSelectedRow
-            viewController.ciudades.append(self.cityList[indexPath!.row])
-        }
-    }
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if (segue.identifier == "goBackSegue"){
+//            let viewController:CustomViewController = segue.destination as! CustomViewController
+//            let indexPath = self.tableView.indexPathForSelectedRow
+//            let citySelected = self.cityList[indexPath!.row]
+//            viewController.ciudades.append(City(name: citySelected.name, id: citySelected.id, country: citySelected.country))
+//        }
+//    }
+    
     //----------------------------------//
 
     //
@@ -73,24 +77,7 @@ class AddCityViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         return cell
     }
-    
-    //Cuando se selecciona una ciudad se le informa al delegado y
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView == resultController.tableView {
-            // call this method on whichever class implements our delegate protocol
-//            delegate?.cityIsSelected(filteredCity[indexPath.row])
-            // go back to the previous view controller
-//            navigationController?.popViewController(animated: true)
-//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
-            self.performSegue(withIdentifier: "goBackSegue", sender: self)
-        } else {
-//            delegate?.cityIsSelected(cityList[indexPath.row])
-//            navigationController?.popViewController(animated: true)
-//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
-            self.performSegue(withIdentifier: "goBackSegue", sender: self)
-        }
-    }
-    
+
     //
     public func updateSearchResults(for searchController: UISearchController) {
         filteredCity = cityList.filter({ (city:City) -> Bool in
@@ -102,4 +89,27 @@ class AddCityViewController: UIViewController, UITableViewDelegate, UITableViewD
         })
         resultController.tableView.reloadData()
     }
+    
+    //Cuando se selecciona una ciudad se le informa al delegado y
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var citySelected: City
+        
+        if tableView == resultController.tableView {
+            citySelected = filteredCity[indexPath.row]
+        } else {
+            citySelected = cityList[indexPath.row]
+        }
+        
+        WeatherService.sharedInstance.getCityWeather(citySelected.id) { (weatherJSON) in
+            if weatherJSON != JSON.null {
+                let citySelectedWeather = Weather(weatherJSON: weatherJSON)
+                citySelected.weather = citySelectedWeather
+                self.delegate?.cityIsSelected(citySelected)
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+
+        
+    }
+    
 }
