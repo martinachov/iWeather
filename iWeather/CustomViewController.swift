@@ -8,12 +8,11 @@
 
 import UIKit
 
-class CustomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DataEnteredDelegate{
+class CustomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddCityEnteredDelegate {
 
     //Tabla de ciudades
     @IBOutlet var cityTable: UITableView!
     var ciudades = [City]()
-    
     
     //--------------Life Cycle--------------//
     override func viewDidLoad() {
@@ -35,10 +34,16 @@ class CustomViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.cityTable.reloadData()
     }
     
+    //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addCitySegue" {
             let secondViewController = segue.destination as! AddCityViewController
             secondViewController.delegate = self
+        }
+        if segue.identifier == "citySelectedSegue" {
+            if let cityWeatherViewController = segue.destination as? CityWeatherViewController {
+                cityWeatherViewController.actualCity = sender as? City
+            }
         }
     }
     
@@ -71,10 +76,16 @@ class CustomViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 cityCell = cityTable.dequeueReusableCell(withIdentifier: "cityCell", for: indexPath) as! CityTableViewCell
                 cityCell.cityLabel.text = ciudades[indexPath.row].name
                 cityCell.timeLabel.text = self.getCurrentTime()
-                cityCell.tempLabel.text = self.formatTempValue(ciudades[indexPath.row].weather.temp)
+                cityCell.tempLabel.text = self.formatTempValue(ciudades[indexPath.row].weather.temp) + "º"
                 return cityCell
             }
         }
+    }
+    
+    //
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let citySelected = self.ciudades[indexPath.row]
+        performSegue(withIdentifier: "citySelectedSegue", sender: citySelected)
     }
     
     //Funcionalidad para habilitar el Swipe Delete
@@ -88,8 +99,7 @@ class CustomViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     //Implementacion del metodo definido en el protocolo DataEnteredDelegate
     //Se selecciono una ciudad en otro view controller
-    func cityIsSelected(_ cityInfo: City) {
-        let city = City(name: cityInfo.name, id: cityInfo.id, country: cityInfo.country, weather: cityInfo.weather)
+    func cityIsSelected(_ city: City) {
         ciudades.append(city)
     }
  

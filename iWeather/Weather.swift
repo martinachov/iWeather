@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class Weather {
+struct Weather {
     
     var temp: String!
     var temp_min: String!

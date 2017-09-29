@@ -8,7 +8,7 @@
 
 import Foundation
 
-class City {
+struct City {
     
     var name: String!
     var id: String!
@@ -27,5 +27,7 @@ class City {
         self.id = id
         self.country = country
     }
+    
+    init (){}
     
 }

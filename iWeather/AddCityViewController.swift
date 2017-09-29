@@ -10,7 +10,7 @@ import UIKit
 import SwiftyJSON
 
 // Protocolo usado para mandar la ciudad seleccionada al controller correspondiente
-protocol DataEnteredDelegate: class {
+protocol AddCityEnteredDelegate: class {
     func cityIsSelected(_ info: City)
 }
 

@@ -23,7 +23,6 @@ class CityService {
                     let json =  try JSONSerialization.jsonObject(with: data, options: [])
                     
                     if let cityList = json as? [[String:Any]] {
-                        print (cityList)
                         var cityResultList: [City] = []
                         var cityName: String
                         var cityId: String
